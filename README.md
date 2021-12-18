@@ -1,6 +1,6 @@
 # php_mvc_javascript
 
-C'est petit projet en PHP créé en appliquant la structure MVC(model, vue, controller)
+C'est un petit projet créé en PHP  en appliquant la structure MVC(model, vue, controller)
 <ul>
     <li>Template : html</li>
     <li>Javascript natif</li>
