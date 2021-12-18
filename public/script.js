@@ -39,10 +39,10 @@ function switchAdminMenu(){
             animate(null,menu,
             [
                 { transform: 'translateX(-200px)' }
-            ], 300, 1,
+            ], 200, 1,
             ()=>{
                 menu.style.display = "none";
-            },280);
+            },180);
         }else{
             //menu.style.display = "block";
             animate(()=>{
@@ -52,7 +52,7 @@ function switchAdminMenu(){
             [
                 { transform: 'translateX(-200px)' },
                 { transform: 'translateX(0)' }
-            ], 300, 1);
+            ], 200, 1);
         }
     }
 }

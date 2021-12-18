@@ -20,4 +20,16 @@
             <div>Articles</div>
         </a>
    </div>
+   <div class="onelink">
+        <a>
+            <div><i class="bi bi-chat-quote-fill"></i></div>
+            <div>Commentaires</div>
+        </a>
+   </div>
+   <div class="onelink">
+        <a>
+            <div><i class="bi bi-people-fill"></i></div>
+            <div>Utilisateurs</div>
+        </a>
+   </div>
 </div>
