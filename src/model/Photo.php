@@ -28,6 +28,19 @@ class Photo extends AbstractModel{
         return $tab;
     }
 
+    public function addOneClassicPhoto($files,$index,$prefix=""){
+        $parameters = $this->getTable();
+        unset($parameters["id"],$parameters["created"]);
+        $extension = pathinfo($files["name"][$index], PATHINFO_EXTENSION);
+        $parameters = [
+            "origin" => $files["name"][$index],
+            "name" => uniqid().".".$extension
+        ];
+        $tab = $this->persist("photo",$parameters);
+        move_uploaded_file($files['tmp_name'][$index], 'public/photos/'.$parameters["name"]);
+        return $tab;
+    }
+
     public function getAllPhotos(){
         return $this->findBy("photo");
     }
@@ -35,7 +48,7 @@ class Photo extends AbstractModel{
     public function deleteOnePhoto($id){
         $onephoto = $this->findBy("photo",["id"=>$id])[0];
         $this->remove("photo",$id);
-        unlink("public/photos/".$onephoto["name"]);
+        if(file_exists("public/photos/".$onephoto["name"]))unlink("public/photos/".$onephoto["name"]);
     }
     
 }

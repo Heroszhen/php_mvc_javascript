@@ -255,6 +255,10 @@ function uploadPhotos_jquery(){
     cleanChosenPhotos();
 }
 
+function insertPhotos(fileslist){
+    console.log(fileslist)
+}
+
 
 function cleanChosenPhotos(){
     document.getElementById("chosen-photos").innerHTML = "";
@@ -269,6 +273,16 @@ function deletePhoto($id,e){
         let col = e.target.parentNode.parentNode.parentNode.parentNode;
         col.remove();
     }); 
+}
+
+function sortPhotos(keywords){
+    let images = document.querySelectorAll(".photo_wrap img");
+    images.forEach((img)=>{
+        let col = img.parentNode.parentNode.parentNode;
+        col.classList.add("d-none")
+        let alt = img.getAttribute("alt");
+        if(alt.toLowerCase().includes(keywords.toLowerCase()))col.classList.remove("d-none");
+    });
 }
 
 /**

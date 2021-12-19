@@ -9,7 +9,7 @@ require_once dirname(__DIR__)."/header.php";
                 <section>
                     <div class="mb-2 d-flex align-items-center justify-content-between">
                         <button class="btn btn-success btn-sm" id="add-photo" onclick="openModal_adminphotos()">Ajouter</button>
-                        <input class="form-control form-control-sm" type="text" placeholder="Default input" style="width:200px;">
+                        <input class="form-control form-control-sm" type="text" placeholder="Default input" style="width:200px;" onkeyup="sortPhotos(event.target.value)">
                     </div>
                     <div id="allphoto" class="mt-3 row">
                         <?php foreach($args["allphoto"] as $photo){ ?>
@@ -33,8 +33,19 @@ require_once dirname(__DIR__)."/header.php";
                 </section>
                 
                 <section class="mt-5">
-                    <form id="form">
-                        
+                    <form id="form" class="row" action="/admin/classicformuploadphotos" method="POST" enctype="multipart/form-data">
+                        <h3 class="text-center col-12"></h3>
+                        <div class="form-group col-md-6">
+                            <label for="photo_name">Nom(préfix)</label>
+                            <input type="text" class="form-control" name="photo_name" id="poto_name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="photos_file">Photo</label>
+                            <input type="file" class="form-control-file" name="photos_file[]" id="photos_file" multiple onchange="insertPhotos(event.target.files)">
+                        </div>
+                        <div class="col-12 mt-2">
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        </div>
                     </form>
                 </section>
             </div>

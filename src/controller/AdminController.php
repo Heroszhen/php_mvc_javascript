@@ -106,6 +106,15 @@ class AdminController extends AbstractController{
         ]);
     }
 
+    public function uploadPhoto_classic(){echo "<pre>";var_dump($_FILES);echo "</pre>";
+        $total = count($_FILES["photos_file"]["name"]);
+        if($total > 0)$photo = new Photo();
+        for($i = 0;$i < $total;$i++){
+            $photo->addOneClassicPhoto($_FILES['photos_file'], $i, $_POST["photo_name"]);
+        }
+        $this->Toredirect("admin/photos");
+    }
+
     public function deletePhoto($id){
         $response = [
             "status" => 1,
