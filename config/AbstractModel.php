@@ -55,8 +55,9 @@ abstract class AbstractModel{
 	}
 
 
-	protected function findBy(string $entity,array $params){
-		$req = "SELECT * FROM ".$entity." where ";
+	protected function findBy(string $entity,array $params=[]){
+		$req = "SELECT * FROM ".$entity;
+		if(count($params) > 0)$req .= " where ";
 		$index = 0;
 		foreach($params as $key=>$value){
 			if($index < count($params) - 1){
@@ -68,6 +69,11 @@ abstract class AbstractModel{
 		}
 		$result = $this->execRequete($req,$params);
 		return $result->fetchAll();
+	}
+
+	protected function remove(string $entity,int $id){
+		$req = $req = "DELETE FROM ".$entity." WHERE id = ".$id;
+        $this->pdo->query($req);
 	}
 
 }

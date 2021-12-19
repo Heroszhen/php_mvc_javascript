@@ -10,4 +10,8 @@ return function(RouteCollector $r) {
     $r->addRoute('GET', '/admin/getcategory/{id:\d+}',array(new App\Controller\AdminController(), "getCategory"));
     $r->addRoute('DELETE', '/admin/deletecategory/{id:\d+}',array(new App\Controller\AdminController(), "deleteCategory"));
     $r->addRoute('PUT', '/admin/modifycategory/{id:\d+}',array(new App\Controller\AdminController(), "modifyCategory"));
+    $r->addRoute('GET', '/admin/photos',array(new App\Controller\AdminController(), "getAllPhotos"));
+    $r->addRoute('POST', '/admin/fetchuploadphoto',array(new App\Controller\AdminController(), "uploadPhoto_fetch"));
+    $r->addRoute('POST', '/admin/jqueryuploadphoto',array(new App\Controller\AdminController(), "uploadPhoto_jquery"));
+    $r->addRoute('DELETE', '/admin/deletephoto/{id:\d+}',array(new App\Controller\AdminController(), "deletePhoto"));
 };

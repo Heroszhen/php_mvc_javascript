@@ -5,6 +5,7 @@ namespace App\Controller;
 use Config\AbstractController;
 use Config\FlashBag;
 use App\Model\Category;
+use App\Model\Photo;
 
 class AdminController extends AbstractController{
 
@@ -73,6 +74,46 @@ class AdminController extends AbstractController{
         $post = json_decode($post);
         $category = new Category();
         $category->updateCategory($post->category_id,$post->category_name);
+        $this->json($response);
+    }
+
+    public function getAllPhotos(){
+        if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != 1)$this->Toredirect("");
+        $_SESSION["page"] = "admin";
+        $_SESSION["menu"] = "photo";
+
+        $photo = new Photo();
+        $allphoto = $photo->getAllPhotos();
+        $allphoto = array_reverse($allphoto);
+        return $this->render("admin/photos.php",[
+            "allphoto" => $allphoto
+        ]);
+    }
+
+    public function uploadPhoto_fetch(){
+        $photo = new Photo();
+        $tab = $photo->addOnePhoto($_FILES['photo']);
+        return $this->render("admin/onephoto.php",[
+            "photo" => $tab
+        ]);
+    }
+
+    public function uploadPhoto_jquery(){
+        $photo = new Photo();
+        $tab = $photo->addOnePhoto($_FILES['photo']);
+        return $this->render("admin/onephoto.php",[
+            "photo" => $tab
+        ]);
+    }
+
+    public function deletePhoto($id){
+        $response = [
+            "status" => 1,
+            "message" => ""
+        ];
+
+        $photo = new Photo();
+        $photo->deleteOnePhoto($id);
         $this->json($response);
     }
 }

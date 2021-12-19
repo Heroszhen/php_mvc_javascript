@@ -14,7 +14,9 @@
     <title>PHP MVC</title>
   </head>
   <body>
-
-  <?php
-    if($_SESSION["page"] == "admin")require_once dirname(__DIR__)."/view/admin/adminheader.php";
-  ?>
+    <div id="bigimg">
+      <img class="pointer" id="" alt="" onclick="closeBigimg()">
+    </div>
+    <?php
+      if($_SESSION["page"] == "admin")require_once dirname(__DIR__)."/view/admin/adminheader.php";
+    ?>

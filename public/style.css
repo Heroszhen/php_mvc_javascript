@@ -11,7 +11,11 @@ a , a:hover{
     cursor: pointer;
 }
 
-/*
+.fullwidth{
+    width:100% !important;
+}
+
+
 #bigimg{
     position: absolute;
     z-index: 3000;
@@ -20,16 +24,17 @@ a , a:hover{
     width:100vw;
     height:100vh;
     background-color:rgba(0,0,0,0.6);
-    padding-top:10px;
-    padding-bottom:10px;
+    padding:5px;
     text-align: center;
     display:none;
+    justify-content: center;
+    align-items: center;
 }
 
 #bigimg img{
     height:100%;
     width:auto;
-}*/
+}
 
 
 .sb-color{
@@ -188,4 +193,92 @@ a , a:hover{
 }
 #home-index form{
     border-radius:5px;
+}
+
+
+/*admin-photos*/
+#admin-photos #allphoto .photo_wrap{
+    width:100%;
+    height:150px;
+    overflow: hidden;
+}
+#admin-photos #allphoto .photo_wrap img{
+    cursor: pointer;
+}
+#admin-photos #allphoto .onephoto{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:2px;
+}
+
+#admin-photos #allphoto .onephoto>div{
+    cursor: pointer;
+}
+#admin-photos #allphoto .onephoto>div:nth-child(1){
+    width:calc(100% - 50px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#admin-photos #allphoto .onephoto>div:nth-child(2){
+    font-size:20px;
+}
+#admin-photos #allphoto .onephoto>div:nth-child(2):hover{
+    color:red;
+}
+
+#admin-photos .modal label[for='files']{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border:1px dashed black;
+    border-radius:5px;
+    width:100%;
+    height:100px;
+    background:white;
+    cursor: pointer;
+}
+
+#admin-photos .modal #chosen-photos{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+#admin-photos .modal #chosen-photos .deletephoto{
+    position:absolute;
+    z-index: 10;
+    top:-10px;
+    left:calc(100% - 25px);
+    display:flex;
+    font-size:20px;
+    cursor: pointer; 
+    font-weight: bold; 
+    color:red;
+    padding:0 3px;
+    border-radius:3px;
+}
+#admin-photos .modal #chosen-photos .deletephoto:hover{
+   background-color: red;
+   color:white;
+}
+#admin-photos .modal #chosen-photos .photo_wrap{
+    position:relative;
+    width:10%;
+    padding:5px;
+    margin-bottom:15px;
+}
+
+@media (max-width:767px) {
+    #bigimg img{
+        width:100%;
+        height:auto;
+    }
+}
+
+@media (max-width:575px) {
+    #admin-photos .modal #chosen-photos .photo_wrap{
+        width:49%;
+    }
 }

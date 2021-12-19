@@ -59,7 +59,7 @@ function switchAdminMenu(){
 
 
 //admin 
-//index.html.twig
+//index.php
 /*
 $("#admin-index").on("click","button#add-category",()=>{
     $("#ModalLabel").text("Ajouter une category");
@@ -67,7 +67,7 @@ $("#admin-index").on("click","button#add-category",()=>{
 });*/
 $("#admin-index button#add-category").click(()=>{
     $("#ModalLabel").text("Ajouter une category");
-    $("#category_id").val("");;
+    $("#category_id").val("");
     $("#category_name").val("");
     $("#btn-modal").click();
 });
@@ -148,4 +148,140 @@ function findCategory(keywords){
         tr.classList.add("d-none");
         if(td_name.innerHTML.toLowerCase().includes(keywords.toLowerCase()))tr.classList.remove("d-none");
     });
+}
+
+//photos.php
+let files = [];
+function openModal_adminphotos(){
+    files = [];
+    cleanChosenPhotos();
+    document.getElementById('btn-modal-adminphotos').click()
+}
+
+function choosePhotos(fileslist){
+    displayFiles(fileslist);
+}
+function dragenter(e){
+    return false;
+}
+function dragleave(e){
+    return false;
+}
+function dragover(e){
+    e.preventDefault()
+    e.stopPropagation()
+    return false;
+}
+function drop(e){
+    e.preventDefault()
+    e.stopPropagation()
+    let dt = e.dataTransfer
+    displayFiles(dt.files);
+    return false;
+}
+
+function displayFiles(fileslist){
+    let list = document.getElementById("chosen-photos");
+    for (let i = 0; i < fileslist.length; i++) {
+        files.push(fileslist.item(i));
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            let div = document.createElement("div");
+            div.classList.add("photo_wrap");
+            let div2 = document.createElement("div");
+            div2.classList.add("deletephoto");
+            div2.setAttribute("data-key",i);
+            div2.innerHTML = "X";
+            div2.setAttribute('onclick',"removeFile("+i+")");
+            div.appendChild(div2);
+            let img = document.createElement("img");
+            img.setAttribute("src",e.target.result);
+            img.setAttribute("alt","");
+            //img.onclick = removeFile(i);
+            div.appendChild(img);
+            list.appendChild(div)
+        }
+        reader.readAsDataURL(fileslist.item(i));
+        
+    }
+}
+function removeFile(key){
+    files.splice(key,1);
+    let div = document.querySelector("div[data-key='"+key+"']");
+    div.parentNode.remove();
+    
+}
+
+function uploadPhotos(){
+    let type = 2;
+    if(files.length != 0){
+        if(type == 1)uploadPhotos_fetch();
+        if(type == 2)uploadPhotos_jquery();
+    }
+}
+
+function uploadPhotos_fetch(){
+    files.forEach(file=>{
+        let form_data = new FormData();
+        form_data.append('photo', file);
+        fetch("/admin/fetchuploadphoto", {
+            method:"POST",
+            body : form_data
+        }).then(function(response){
+            return response.text();
+        }).then(function(text){
+            //let response_dom = new DOMParser().parseFromString(text, "text/xml");
+            document.getElementById("allphoto").insertAdjacentHTML( 'afterbegin',text );
+        });
+    });
+    cleanChosenPhotos();
+}
+
+function uploadPhotos_jquery(){
+    files.forEach(file=>{
+        let form_data = new FormData();
+        form_data.append('photo', file);
+        $.ajax({
+            url: '/admin/jqueryuploadphoto',
+            data: form_data,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(data){
+                document.getElementById("allphoto").insertAdjacentHTML( 'afterbegin',data );
+            }
+        });
+    });
+    cleanChosenPhotos();
+}
+
+
+function cleanChosenPhotos(){
+    document.getElementById("chosen-photos").innerHTML = "";
+}
+
+
+function deletePhoto($id,e){
+    fetch("/admin/deletephoto/" + $id,{method:'DELETE'})
+    .then(function(response){
+        return response.json();
+    }).then(function(json){
+        let col = e.target.parentNode.parentNode.parentNode.parentNode;
+        col.remove();
+    }); 
+}
+
+/**
+ * 
+ * @param {string} url 
+ * @param {int} type 1:localhost, 2 hostname(constant),3 other
+ */
+function showPhoto(url,type){
+    if(type == 1)document.querySelector("#bigimg img").setAttribute("src",url);
+    document.getElementById("bigimg").style.display = "flex";
+}
+
+function closeBigimg(){
+    document.getElementById("bigimg").style.display = "none";
+    document.querySelector("#bigimg img").removeAttribute("src");
 }
