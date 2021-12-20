@@ -19,4 +19,13 @@ class Article extends AbstractModel{
     public function getArticleById($id){
         return $this->findBy("article",["id"=>$id]);
     }
+
+    public function addOneArticle(array $params){
+        unset($params["id"],$params["created"]);
+        return $this->persist("article",$params);
+    }
+    public function updateOneArticle(array $params){
+        unset($params["created"]);
+        return $this->persist("article",$params,$params["id"]);
+    }
 }

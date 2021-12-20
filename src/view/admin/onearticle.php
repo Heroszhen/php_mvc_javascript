@@ -12,7 +12,12 @@ require_once dirname(__DIR__)."/header.php";
             </div>
             <div class="col-12">
                 <section>
-                    <form method="POST" action="/admin/editer_un_article<?php if($args["id"] != null)echo "/".$args["id"]; ?>">
+                    <form method="POST" action="/admin/editer_un_article<?php if($args["id"] != null)echo "/".$args["id"]; ?>" enctype="multipart/form-data">
+                        <?php if(count($args["flash"]) != 0){ ?>
+                            <div class="alert alert-<?= $args["flash"]["type"] ?>">
+                                <?= $args["flash"]["message"] ?>
+                            </div>
+                        <?php } ?>
                         <div class="fifty">
                             <div class="form-group mb-4">
                                 <label for="article_title">Titre</label>
@@ -34,11 +39,12 @@ require_once dirname(__DIR__)."/header.php";
                             </div>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="article_text">Contenu</label><?= $args['table']['text'] ?>
-                            <textarea class="form-control ckeditor" id="article_text" name="article_text" rows="3"  value="<?= $args['table']['text'] ?>" required="required"></textarea>
+                            <label for="article_text">Contenu</label>
+                            <textarea class="form-control ckeditor" id="article_text" name="article_text" rows="3" required="required"><?= $args['table']['text'] ?></textarea>
                         </div>
-                        <div>
-                        </dvi>
+                        <div class="d-none">
+                            <input type="text" name="article_id" id="article_id" value="<?= $args["table"]["id"] ?>">
+                        </div>
                         <div class="mt-2 text-center">
                             <button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
                         </div> 
@@ -52,6 +58,3 @@ require_once dirname(__DIR__)."/header.php";
 <?php
 require_once dirname(__DIR__)."/footer.php";
 ?>
-
-<script>
-</script>

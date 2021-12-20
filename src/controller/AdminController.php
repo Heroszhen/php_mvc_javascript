@@ -108,7 +108,7 @@ class AdminController extends AbstractController{
         ]);
     }
 
-    public function uploadPhoto_classic(){echo "<pre>";var_dump($_FILES);echo "</pre>";
+    public function uploadPhoto_classic(){
         $total = count($_FILES["photos_file"]["name"]);
         if($total > 0)$photo = new Photo();
         for($i = 0;$i < $total;$i++){
@@ -144,23 +144,33 @@ class AdminController extends AbstractController{
         if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != 1)$this->Toredirect("");
         $_SESSION["page"] = "admin";
         $_SESSION["menu"] = "onearticle";
+        $flash = new FlashBag();
+        $flash->empty();
 
         $article = new Article();
         $table = $article->getTable();
-
-        $title = (isset($_POST["article_title"]))?$_POST["article_title"]:"";
-        $category_id = (isset($_POST["article_category_id"]))?$_POST["article_category_id"]:"";
-        $text = (isset($_POST["article_text"]))?$_POST["article_text"]:"";
+        //get
         if($id != null){
-            $onearticle = $article->getArticleById($id);
-            $title = $onearticle["id"];
-            $category_id = $onearticle["category_id"];
-            $text = $onearticle["text"];
+            $results = $article->getArticleById($id);
+            if(count($results) > 0)$table = $results[0];
         }
-
-        $table["title"] = $title;
-        $table["category_id"] = $category_id;
-        $table["text"] = $text;
+        //post
+        if(isset($_POST["article_id"])){
+            $table["title"] = (isset($_POST["article_title"]))?$_POST["article_title"]:"";
+            $table["category_id"] = (isset($_POST["article_category_id"]))?$_POST["article_category_id"]:"";
+            $table["text"] = (isset($_POST["article_text"]))?html_entity_decode($_POST["article_text"]):"";
+            if($table["text"] != ""){
+                if($_POST["article_id"] == ""){
+                    $article->addOneArticle($table);
+                    $this->Toredirect("admin/articles");
+                }else{
+                    $article->updateOneArticle($table);
+                    $flash->set("Enregistré","success");
+                }
+            }else{
+                $flash->set("Veuillez remplir tous les champs","danger");
+            }
+        }
         
         $category = new Category();
         $allcategory = $category->findAll()->fetchAll();
@@ -169,7 +179,8 @@ class AdminController extends AbstractController{
         return $this->render("admin/onearticle.php",[
             "id" => $id,
             "table" => $table,
-            "allcategory" => $allcategory
+            "allcategory" => $allcategory,
+            "flash" => $flash->get()
         ]);
     }
 }

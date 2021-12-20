@@ -13,13 +13,14 @@
     <script src="/public/libs/zjs.js"></script>
     <script src="/public/script.js"></script>
 
-    <!--https://ckeditor.com/docs/ckeditor4/latest/guide/dev_jquery.html-->
-    <script src="/public/libs/ckeditor/ckeditor.js"></script>
-    <script src="/public/libs/ckeditor/adapters/jquery.js"></script>
+    <script src="/public/libs/ckeditor_4.17.1_full/ckeditor.js"></script>
+    <script src="/public/libs/ckeditor_4.17.1_full/adapters/jquery.js"></script>
     <script>
         $(function() {
             $('textarea.ckeditor').ckeditor();
         });
     </script>
+
+    
   </body>
 </html>

@@ -30,28 +30,49 @@ abstract class AbstractModel{
 		return $r;
 	}
 
-	protected function persist(string $entity,array $params){
-		$req = "INSERT INTO ".$entity ."(";
-		$req2 = "VALUES (";
-		$index = 0;
-		foreach($params as $key=>$value){
-			$req .= $key;
-			$req2 .= ":".$key;
-			if($index < count($params) - 1){
-				$req .= ", ";
-				$req2 .= ", ";
-			}else{
-				$req .= ")";
-				$req2 .= ")";
-			} 	
-			$index++;
+	/**
+	 * create and update
+	 */
+	protected function persist(string $entity,array $params, int $id=null){
+		if($id == null){
+			$req = "INSERT INTO ".$entity ."(";
+			$req2 = "VALUES (";
+			$index = 0;
+			foreach($params as $key=>$value){
+				$req .= $key;
+				$req2 .= ":".$key;
+				if($index < count($params) - 1){
+					$req .= ", ";
+					$req2 .= ", ";
+				}else{
+					$req .= ")";
+					$req2 .= ")";
+				} 	
+				$index++;
+			}
+			$req .= " ".$req2;
+			$this->execRequete($req,$params);
+			$id = $this->pdo->lastInsertId();
+			$req = "select * from ".$entity." where id = :id";
+			$one = $this->execRequete($req,["id"=>$id]);
+			return $one->fetch();
+		}else{
+			$req = "UPDATE ".$entity." SET ";
+			$req2 = "WHERE id = :id";
+			$index = 0;
+			foreach($params as $key=>$value){
+				if($key != "id"){
+					$req .= $key." = :".$key;
+					if($index < count($params) - 1){
+						$req .= ", ";
+					}
+				}
+				$index++;
+			}
+			$req .= " ".$req2;
+			$this->execRequete($req,$params);
 		}
-		$req .= " ".$req2;
-		$this->execRequete($req,$params);
-		$id = $this->pdo->lastInsertId();
-		$req = "select * from ".$entity." where id = :id";
-		$one = $this->execRequete($req,["id"=>$id]);
-		return $one->fetch();
+		
 	}
 
 

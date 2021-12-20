@@ -19,5 +19,5 @@ return function(RouteCollector $r) {
     $r->addRoute('GET', '/admin/editer_un_article',array(new App\Controller\AdminController(), "editArticle"));
     $r->addRoute('POST', '/admin/editer_un_article',array(new App\Controller\AdminController(), "editArticle"));
     $r->addRoute('GET', '/admin/editer_un_article/{id:\d+}',array(new App\Controller\AdminController(), "editArticle"));
-    $r->addRoute('PUT', '/admin/editer_un_article/{id:\d+}',array(new App\Controller\AdminController(), "editArticle"));
+    $r->addRoute('POST', '/admin/editer_un_article/{id:\d+}',array(new App\Controller\AdminController(), "editArticle"));
 };

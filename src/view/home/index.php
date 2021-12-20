@@ -9,9 +9,9 @@ require_once dirname(__DIR__)."/header.php";
                 <form action="/" method="POST" class="bg-white p-3">
                     <h2 class="text-center">Connexion</h2><?  "ok" ?>
                     <?php if(count($args["flash"]) != 0){ ?>
-                    <div class="alert alert-<?= $args["flash"]["type"] ?>">
-                        <?= $args["flash"]["message"] ?>
-                    </div>
+                        <div class="alert alert-<?= $args["flash"]["type"] ?>">
+                            <?= $args["flash"]["message"] ?>
+                        </div>
                     <?php } ?>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
