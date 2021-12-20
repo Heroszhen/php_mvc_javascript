@@ -6,6 +6,8 @@ use Config\AbstractController;
 use Config\FlashBag;
 use App\Model\Category;
 use App\Model\Photo;
+use App\Model\Article;
+use App\Service\ToolService;
 
 class AdminController extends AbstractController{
 
@@ -124,5 +126,50 @@ class AdminController extends AbstractController{
         $photo = new Photo();
         $photo->deleteOnePhoto($id);
         $this->json($response);
+    }
+
+    public function getAllArticles(){
+        if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != 1)$this->Toredirect("");
+        $_SESSION["page"] = "admin";
+        $_SESSION["menu"] = "article";
+
+       
+        return $this->render("admin/articles.php",[
+            
+        ]);
+    }
+
+
+    public function editArticle($id=null){
+        if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != 1)$this->Toredirect("");
+        $_SESSION["page"] = "admin";
+        $_SESSION["menu"] = "onearticle";
+
+        $article = new Article();
+        $table = $article->getTable();
+
+        $title = (isset($_POST["article_title"]))?$_POST["article_title"]:"";
+        $category_id = (isset($_POST["article_category_id"]))?$_POST["article_category_id"]:"";
+        $text = (isset($_POST["article_text"]))?$_POST["article_text"]:"";
+        if($id != null){
+            $onearticle = $article->getArticleById($id);
+            $title = $onearticle["id"];
+            $category_id = $onearticle["category_id"];
+            $text = $onearticle["text"];
+        }
+
+        $table["title"] = $title;
+        $table["category_id"] = $category_id;
+        $table["text"] = $text;
+        
+        $category = new Category();
+        $allcategory = $category->findAll()->fetchAll();
+        $ts = new ToolService();
+        $allcategory = $ts->sortTDArray($allcategory, "name", 1);
+        return $this->render("admin/onearticle.php",[
+            "id" => $id,
+            "table" => $table,
+            "allcategory" => $allcategory
+        ]);
     }
 }

@@ -15,4 +15,9 @@ return function(RouteCollector $r) {
     $r->addRoute('POST', '/admin/jqueryuploadphoto',array(new App\Controller\AdminController(), "uploadPhoto_jquery"));
     $r->addRoute('POST', '/admin/classicformuploadphotos',array(new App\Controller\AdminController(), "uploadPhoto_classic"));
     $r->addRoute('DELETE', '/admin/deletephoto/{id:\d+}',array(new App\Controller\AdminController(), "deletePhoto"));
+    $r->addRoute('GET', '/admin/articles',array(new App\Controller\AdminController(), "getAllArticles"));
+    $r->addRoute('GET', '/admin/editer_un_article',array(new App\Controller\AdminController(), "editArticle"));
+    $r->addRoute('POST', '/admin/editer_un_article',array(new App\Controller\AdminController(), "editArticle"));
+    $r->addRoute('GET', '/admin/editer_un_article/{id:\d+}',array(new App\Controller\AdminController(), "editArticle"));
+    $r->addRoute('PUT', '/admin/editer_un_article/{id:\d+}',array(new App\Controller\AdminController(), "editArticle"));
 };

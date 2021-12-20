@@ -34,7 +34,7 @@ require_once dirname(__DIR__)."/header.php";
                 
                 <section class="mt-5">
                     <form id="form" class="row" action="/admin/classicformuploadphotos" method="POST" enctype="multipart/form-data">
-                        <h3 class="text-center col-12"></h3>
+                        <h3 class="text-center col-12">Formulaire classique</h3>
                         <div class="form-group col-md-6">
                             <label for="photo_name">Nom(préfix)</label>
                             <input type="text" class="form-control" name="photo_name" id="poto_name">
@@ -42,6 +42,9 @@ require_once dirname(__DIR__)."/header.php";
                         <div class="form-group col-md-6">
                             <label for="photos_file">Photo</label>
                             <input type="file" class="form-control-file" name="photos_file[]" id="photos_file" multiple onchange="insertPhotos(event.target.files)">
+                        </div>
+                        <div class="col-12 mt-2">
+                            <div class="row" id="form-allphoto"></div>
                         </div>
                         <div class="col-12 mt-2">
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -75,9 +78,7 @@ require_once dirname(__DIR__)."/header.php";
                     <div class="mt-2">
                         <button tyoe="button" class="btn btn-primary" onclick="uploadPhotos()">Enregistrer</button>
                     </div>
-                    <div id="chosen-photos" class="mt-4">
-
-                    </div>
+                    <div id="chosen-photos" class="mt-4"></div>
                 </div>
             </div>
         </div>

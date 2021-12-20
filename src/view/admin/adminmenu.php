@@ -14,8 +14,8 @@
             <div>Photos</div>
         </a>
    </div>
-   <div class="onelink">
-        <a>
+   <div class="onelink <?php if($_SESSION['page'] == 'admin' && $_SESSION['menu'] == 'article')echo 'active'; ?>">
+        <a href="/admin/articles">
             <div><i class="bi bi-card-text"></i></div>
             <div>Articles</div>
         </a>

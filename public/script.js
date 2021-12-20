@@ -256,7 +256,23 @@ function uploadPhotos_jquery(){
 }
 
 function insertPhotos(fileslist){
-    console.log(fileslist)
+    let form_allphoto = document.getElementById("form-allphoto");
+    for(i = 0;i < fileslist.length;i++){
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            let div = document.createElement("div");
+            div.classList.add("col-6");
+            div.classList.add("col-md-4");
+            div.classList.add("col-lg-2");
+            div.classList.add("mb-2");
+            div.classList.add("pointer");
+            let img = document.createElement("img");
+            img.setAttribute("src",e.target.result);
+            div.appendChild(img);
+            form_allphoto.appendChild(div);
+        }
+        reader.readAsDataURL(fileslist.item(i));
+    }
 }
 
 

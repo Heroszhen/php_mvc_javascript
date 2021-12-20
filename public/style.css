@@ -36,6 +36,24 @@ a , a:hover{
     width:auto;
 }
 
+.fifty{
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.fifty>div{
+    width:49%
+}
+
+@media (max-width:767px) {
+    .fifty>div{
+        width:100%;
+    }
+}
+
+
+
 
 .sb-color{
     color:#4e73df;
@@ -59,7 +77,7 @@ a , a:hover{
     display:flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.2rem;
 }
 
 #admin-header #btn-adminheader{

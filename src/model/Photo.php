@@ -33,8 +33,8 @@ class Photo extends AbstractModel{
         unset($parameters["id"],$parameters["created"]);
         $extension = pathinfo($files["name"][$index], PATHINFO_EXTENSION);
         $parameters = [
-            "origin" => $files["name"][$index],
-            "name" => uniqid().".".$extension
+            "origin" => $prefix.$files["name"][$index],
+            "name" => $prefix.uniqid().".".$extension
         ];
         $tab = $this->persist("photo",$parameters);
         move_uploaded_file($files['tmp_name'][$index], 'public/photos/'.$parameters["name"]);
