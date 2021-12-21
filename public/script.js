@@ -115,21 +115,40 @@ $("#admin-index").on("submit","form#form-add-category",function(e){
 });
 
 $("#admin-index").on("click","button.modifycategory",function(){
+    let type = 2;
     let id = $(this).attr("data-id");
-    $.get(
-        "/admin/getcategory/" + id,
-        function (response) {
-            response = JSON.parse(response);
-           if(response["status"] == 1){
-                let category = response["message"];
-                $("input#category_id").val(category["id"]);
-                $("input#category_name").val(category["name"]);
-                $("#ModalLabel").text("Modifier une category");
-                $("#btn-modal").click();
-           }
-        }
-    );
+    if(type == 1){
+        $.get(
+            "/admin/getcategory/" + id,
+            function (response) {
+                response = JSON.parse(response);
+                if(response["status"] == 1){
+                    let category = response["message"];
+                    $("input#category_id").val(category["id"]);
+                    $("input#category_name").val(category["name"]);
+                    $("#ModalLabel").text("Modifier une category");
+                    $("#btn-modal").click();
+                }
+            }
+        );
+    }else{
+        getCategory_xhr(id);
+    }
+    
 });
+
+function getCategory_xhr(id){
+    let xhr = getXhr("get","/admin/getcategory/" + id);
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           let category = JSON.parse(xhr.responseText)["message"];
+           document.querySelector("input#category_id").value = category["id"];
+           document.querySelector("input#category_name").value = category["name"];
+           document.querySelector("#ModalLabel").innerHTML = "Modifier une category";
+           document.querySelector("#btn-modal").click();
+        }
+    };
+}
 
 
 function deleteCategory(e,id){

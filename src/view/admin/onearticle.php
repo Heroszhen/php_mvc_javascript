@@ -12,7 +12,7 @@ require_once dirname(__DIR__)."/header.php";
             </div>
             <div class="col-12">
                 <section>
-                    <form method="POST" action="/admin/editer_un_article<?php if($args["id"] != null)echo "/".$args["id"]; ?>" enctype="multipart/form-data">
+                    <form method="POST" action="/admin/editer_un_article<?php if($args["id"] != null)echo "/".$args["id"]; ?>">
                         <?php if(count($args["flash"]) != 0){ ?>
                             <div class="alert alert-<?= $args["flash"]["type"] ?>">
                                 <?= $args["flash"]["message"] ?>

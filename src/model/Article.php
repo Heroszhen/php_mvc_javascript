@@ -26,6 +26,7 @@ class Article extends AbstractModel{
     }
     public function updateOneArticle(array $params){
         unset($params["created"]);
+        $params["text"] = htmlspecialchars_decode($params["text"]);
         return $this->persist("article",$params,$params["id"]);
     }
 }
