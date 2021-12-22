@@ -9,26 +9,39 @@ require_once dirname(__DIR__)."/header.php";
                 <section>
                     <div class="mb-2 d-flex align-items-center justify-content-between">
                         <a href="/admin/editer_un_article" class="btn btn-success btn-sm" >Ajouter</a>
-                        <div>ddd</div>
+                        <div>filtres</div>
                     </div>
-                    <div id="allphoto" class="mt-3 row">
-                        <!-- <?php foreach($args["allphoto"] as $photo){ ?>
-                            <div class="col-6 col-md-4 col-lg-2 mb-4">
-                                <div class="border">
-                                    <div class="photo_wrap">
-                                        <img src="../public/photos/<?= $photo["name"] ?>" alt="<?= $photo['origin'] ?>" onclick="showPhoto('../public/photos/<?= $photo['name'] ?>',1)">
-                                    </div>
-                                    <div class="onephoto border-top">
-                                        <div data-toggle="tooltip" data-placement="bottom" title="<?= $photo['origin'] ?>">
-                                            <?= $photo['origin'] ?>
-                                        </div>
-                                        <div onclick="deletePhoto(<?= $photo['id'] ?>,event)">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?> -->
+                    <div class="mt-3">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Catégorie</th>
+                                    <th scope="col">Créé(e)</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($args["allarticle"] as $key=>$one){ ?>
+                                    <tr>
+                                        <td data-label="Id"><?= $one["id"] ?></td>
+                                        <td data-label="Nom"><?= $one["title"] ?></td>
+                                        <td data-label="Category"><?= $one["category"] ?></td>
+                                        <td data-label="Créé(e)">
+                                            <?php
+                                                $date = new \DateTime($one["created"]);
+                                                echo $date->format('d/m/Y');
+                                            ?>
+                                        </td>
+                                        <td data-label="Actions">
+                                            <a class="btn btn-info btn-sm mr-2 modifycategory" href="/admin/editer_un_article/<?= $one['id'] ?>">Modifier</a>
+                                            <!-- <button class="btn btn-danger btn-sm"  data-id="<?= $one['id'] ?>"  onclick="deleteCategory(event,<?= $one['id'] ?>)">Supprimer</button> -->
+                                        </td>
+                                    </tr>
+                                <?php }?>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
             </div>

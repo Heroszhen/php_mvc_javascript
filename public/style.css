@@ -288,6 +288,19 @@ a , a:hover{
     margin-bottom:15px;
 }
 
+
+#admin-articles #allphotos .photo_wrap{
+    overflow: hidden;
+    max-height:150px;
+}
+#admin-articles #allphotos .photo_wrap + div{
+    font-size:20px;
+}
+#admin-articles #allphotos .photo_wrap + div:hover{
+    color:rgb(60, 60, 219);
+    font-weight: bold;
+}
+
 @media (max-width:767px) {
     #bigimg img{
         width:100%;

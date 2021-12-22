@@ -50,6 +50,21 @@ require_once dirname(__DIR__)."/header.php";
                         </div> 
                     </form>
                 </section>
+                <section class="mt-4">
+                    <h4>Les photos</h4>
+                    <div class="row" id="allphotos">
+                        <?php foreach($args["allphoto"] as $one){ ?>
+                            <div class="col-6 col-md-3 col-lg-2 mb-4">
+                                <div class="photo_wrap">
+                                    <img src="../../public/photos/<?= $one['name'] ?>" alt="" onclick="showPhoto('../../public/photos/<?= $one['name'] ?>',1)">
+                                </div>
+                                <div class="mt-2">
+                                    <i class="bi bi-clipboard-check pointer" onclick="copyPhotoUrl('<?= $one['name'] ?>')"></i>
+                                </div>
+                            </div>
+                        <?php } ?>                
+                    </div>
+                </section>
             </div>
         </div>
     </div>

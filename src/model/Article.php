@@ -17,7 +17,7 @@ class Article extends AbstractModel{
     }
 
     public function getAllArticles(){
-        
+        return $this->findBy("article");
     }
 
     public function getArticleById($id){

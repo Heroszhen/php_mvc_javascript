@@ -1,3 +1,3 @@
 <?php
 
-define("hostname", "https://www.zhen.fr/");
+define("hostname", "http://localhost:8000/");

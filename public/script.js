@@ -3,6 +3,8 @@ $( document ).ready(function() {
     resizeAdminHeaderMenu2();
 });
 
+const host_name = "http://localhost:8000/";
+
 function resizeAdminHeaderMenu(){
     let width = window.innerWidth;
     let header = document.getElementById("admin-header");
@@ -333,4 +335,16 @@ function showPhoto(url,type){
 function closeBigimg(){
     document.getElementById("bigimg").style.display = "none";
     document.querySelector("#bigimg img").removeAttribute("src");
+}
+
+
+//onearticle.php
+async function copyPhotoUrl(name){
+    let input = document.createElement("input");
+    input.classList.add("d-none");
+    input.setAttribute("value", host_name + "public/photos/" + name);
+    document.body.appendChild(input);
+    await navigator.clipboard.writeText(input.value);
+    document.body.removeChild(input);
+    alert("Copié");
 }

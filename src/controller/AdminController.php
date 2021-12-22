@@ -133,9 +133,17 @@ class AdminController extends AbstractController{
         $_SESSION["page"] = "admin";
         $_SESSION["menu"] = "article";
 
-       
+        $article = new Article();
+        $allarticle = $article->getAllArticles();
+        $allarticle = array_reverse($allarticle);
+        $category = new Category();
+        foreach($allarticle as $key=>$value){
+            $allarticle[$key]["category"] = "";
+            $tab = $category->getCategoryById($value["category_id"]);
+            if(isset($tab[0]))$allarticle[$key]["category"] = $tab[0]["name"];
+        }
         return $this->render("admin/articles.php",[
-            
+            "allarticle" => $allarticle
         ]);
     }
 
@@ -176,11 +184,15 @@ class AdminController extends AbstractController{
         $allcategory = $category->findAll()->fetchAll();
         $ts = new ToolService();
         $allcategory = $ts->sortTDArray($allcategory, "name", 1);
+
+        $photo = new Photo();
+        $allphoto = $photo->getAllPhotos();
         return $this->render("admin/onearticle.php",[
             "id" => $id,
             "table" => $table,
             "allcategory" => $allcategory,
-            "flash" => $flash->get()
+            "flash" => $flash->get(),
+            "allphoto"=> $allphoto
         ]);
     }
 }
