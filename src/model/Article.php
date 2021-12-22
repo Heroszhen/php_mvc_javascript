@@ -16,6 +16,10 @@ class Article extends AbstractModel{
         ];
     }
 
+    public function getAllArticles(){
+        
+    }
+
     public function getArticleById($id){
         return $this->findBy("article",["id"=>$id]);
     }
@@ -26,7 +30,7 @@ class Article extends AbstractModel{
     }
     public function updateOneArticle(array $params){
         unset($params["created"]);
-        $params["text"] = htmlspecialchars_decode($params["text"]);
+        $params["text"] = htmlspecialchars($params["text"]);//htmlentities
         return $this->persist("article",$params,$params["id"]);
     }
 }
