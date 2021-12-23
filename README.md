@@ -6,6 +6,8 @@ C'est un petit projet créé en PHP  en appliquant la structure MVC(model, vue, 
     <li>Javascript natif</li>
     <li>Router : nikic/fast-route</li>
     <li>Serveur : php -S localhost:8000</li>
+    <li>phpunit</li>
+    <li>phpmailer : gmail</li>
 </ul>
 
 <div>
