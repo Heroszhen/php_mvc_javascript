@@ -5,6 +5,7 @@ C'est un petit projet créé en PHP  en appliquant la structure MVC(model, vue, 
     <li>Template : html</li>
     <li>Javascript natif</li>
     <li>Router : nikic/fast-route</li>
+    <li>Serveur : php -S localhost:8000</li>
 </ul>
 
 <div>
