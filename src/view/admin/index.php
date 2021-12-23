@@ -15,10 +15,28 @@ require_once dirname(__DIR__)."/header.php";
                      <table class="table table-striped">
                         <thead class="thead-dark">
                             <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Créé(e)</th>
-                            <th scope="col">Actions</th>
+                                <th scope="col">
+                                    <div class="fullwith d-flex align-items-center">
+                                        <div class="mr-2">Id</div>
+                                        <div class="mr-2 arrow pointer"><i class="bi bi-arrow-up" onclick="sortAllCategorie('id',1)"></i></div>
+                                        <div class="arrow pointer"><i class="bi bi-arrow-down" onclick="sortAllCategorie('id',2)"></i></div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="fullwith d-flex align-items-center">
+                                        <div class="mr-2">Nom</div>
+                                        <div class="mr-2 arrow pointer"><i class="bi bi-arrow-up" onclick="sortAllCategorie('name',1)"></i></div>
+                                        <div class="arrow pointer"><i class="bi bi-arrow-down" onclick="sortAllCategorie('name',2)"></i></div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="fullwith d-flex align-items-center">
+                                        <div class="mr-2">Crée(e)</div>
+                                        <div class="mr-2 arrow pointer"><i class="bi bi-arrow-up" onclick="sortAllCategorie('created',1)"></i></div>
+                                        <div class="arrow pointer"><i class="bi bi-arrow-down" onclick="sortAllCategorie('created',2)"></i></div>
+                                    </div>
+                                </th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -28,7 +28,9 @@ class Category extends AbstractModel{
 
     public function deleteCategory($id){
         $req = $req = "DELETE FROM category WHERE id = ".$id;
-        $this->pdo->query($req);
+        $del = $this->pdo->prepare($req);
+        $del->execute();
+        return $del->rowCount();
     }
 
     public function updateCategory($id,$name){

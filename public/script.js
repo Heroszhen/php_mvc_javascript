@@ -156,10 +156,12 @@ function getCategory_xhr(id){
 function deleteCategory(e,id){
     let tr = e.target.parentNode.parentNode;
     fetch("/admin/deletecategory/" + id,{method:'DELETE'})
-    .then(response => response.text())
+    .then(response => response.json())
     .then(json=>{
-        tr.remove();
-    });
+        if(json["message"] == 1)tr.remove();
+        else alert("Erreurs");
+    })
+    .catch(()=>alert("Erreurs"));
 }
 
 function findCategory(keywords){
@@ -170,6 +172,56 @@ function findCategory(keywords){
         if(td_name.innerHTML.toLowerCase().includes(keywords.toLowerCase()))tr.classList.remove("d-none");
     });
 }
+
+/**
+ * 
+ * @param {string} field 
+ * @param {int} order 1->up, 2->down
+ */
+function sortAllCategorie(field,order){
+    let tbody = document.querySelector("#admin-index tbody");
+    let trs = document.querySelectorAll("#admin-index tbody tr");
+    tbody.innerHTML = "";
+    let tab = [...trs];
+    if(field == 'id'){
+        let a_id,b_id;
+        tab.sort(function(a,b){
+            a_id = parseInt(a.querySelector("td").innerHTML);
+            b_id = parseInt(b.querySelector("td").innerHTML);
+            if(order == 1)return b_id - a_id;
+            else return a_id - b_id;
+        })
+            
+    }
+    if(field == "name"){
+        let a_name = "";
+        let b_name = "";
+        tab.sort(function(a,b){
+            a_name = a.querySelectorAll("td")[1].innerHTML;
+            b_name = b.querySelectorAll("td")[1].innerHTML;
+            if(order == 1)return b_name.localeCompare(a_name);
+            else return  a_name.localeCompare(b_name);
+        })
+    }
+    if(field == "created"){
+        let a_date = "";
+        let b_date = "";
+        let tab1 = [];
+        let tab2 = [];
+        tab.sort(function(a,b){
+            a_date = a.querySelectorAll("td")[2].innerHTML.trim();
+            b_date = b.querySelectorAll("td")[2].innerHTML.trim();
+            $tab1 = a_date.split('/').reverse();
+            $tab2 = b_date.split('/').reverse();
+            a_date = new Date($tab1[0] + "-" + $tab1[1] + "-" + $tab1[2]);
+            b_date = new Date($tab2[0] + "-" + $tab2[1] + "-" + $tab2[2]);
+            if(order == 1)return b_date - a_date;
+            else return  a_date - b_date;
+        })
+    }
+    tab.forEach(node=>tbody.appendChild(node));
+}
+
 
 //photos.php
 let files = [];

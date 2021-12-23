@@ -36,7 +36,7 @@ require_once dirname(__DIR__)."/header.php";
                                         </td>
                                         <td data-label="Actions">
                                             <a class="btn btn-info btn-sm mr-2 modifycategory" href="/admin/editer_un_article/<?= $one['id'] ?>">Modifier</a>
-                                            <!-- <button class="btn btn-danger btn-sm"  data-id="<?= $one['id'] ?>"  onclick="deleteCategory(event,<?= $one['id'] ?>)">Supprimer</button> -->
+                                            <button class="btn btn-danger btn-sm"  data-id="<?= $one['id'] ?>" disabled>Supprimer</button>
                                         </td>
                                     </tr>
                                 <?php }?>

@@ -63,7 +63,8 @@ class AdminController extends AbstractController{
             "message" => ""
         ];
         $category = new Category();
-        $category->deleteCategory($id);
+        
+        $response["message"] = $category->deleteCategory($id);
         $this->json($response);
     }
 
