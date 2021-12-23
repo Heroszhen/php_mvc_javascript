@@ -20,5 +20,5 @@ return function(RouteCollector $r) {
     $r->addRoute('POST', '/admin/editer_un_article',array(new App\Controller\AdminController(), "editArticle"));
     $r->addRoute('GET', '/admin/editer_un_article/{id:\d+}',array(new App\Controller\AdminController(), "editArticle"));
     $r->addRoute('POST', '/admin/editer_un_article/{id:\d+}',array(new App\Controller\AdminController(), "editArticle"));
-    $r->addRoute('GET', '/api/getallcategory',array(new App\Controller\ApiController(), "getAllCategory"));
+    $r->addRoute('GET', '/api/getallarticle',array(new App\Controller\ApiController(), "getAllArticle"));
 };

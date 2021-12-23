@@ -2,3 +2,15 @@ php -S localhost:8000
 
 ---Relations entre les tables d'une base MySql
 https://www.youtube.com/watch?v=cd-68RrXo-k
+
+
+---tests unitaires
+https://phpunit.readthedocs.io/fr/latest/installation.html
+composer require --dev phpunit/phpunit
+./vendor/bin/phpunit --version
+
+1)fichiers
+-tests/ 
+-phpunit.xml
+https://www.youtube.com/watch?v=a5ZKCFINUkU
+./vendor/bin/phpunit

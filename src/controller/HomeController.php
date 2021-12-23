@@ -5,14 +5,15 @@ namespace App\Controller;
 use Config\AbstractController;
 use Config\FlashBag;
 use App\Model\User;
+use App\Observer\Observers\LoginObserver;
+use App\Observer\Subjects\UserSubject;
 
 class HomeController extends AbstractController{
-
     public function index(){
-
+        
         if(isset($_SESSION["user"]))$this->Toredirect("admin");
 
-        $_SESSION["page"] = "home";
+        $_SESSION["page"] = "home";//var_dump($_SESSION);
         $flash = new FlashBag();
         $flash->empty();
         $user = new User();
@@ -29,9 +30,12 @@ class HomeController extends AbstractController{
                     $found = $result[0];
                     if (password_verify($password, $found["password"])){
                         $found["password"] = "";
-                        $_SESSION["user"] = $found;
-                        //redirection
-                        $_SESSION["page"] = "admin_category";
+                        $userSubject = new UserSubject($found);
+                        $loginObserver = new LoginObserver();
+                        $userSubject->attach($loginObserver);
+                        $userSubject->notify();
+                        $userSubject->detach($loginObserver);
+                        
                         $this->Toredirect("admin");
                     }
                 }
