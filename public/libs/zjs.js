@@ -22,3 +22,25 @@ function getXhr(type,url){
     }
     return xhr;
 }
+
+async function myFetch(method, url, jsonString="", responseType="json"){
+    let response;
+    if(method == "get" || method == "delete"){
+        response = await fetch(url,{method:method});
+    }
+    if(method == "post" || method == "put"){
+        response = await fetch("/admin/modifycategory/" + id,{
+            method:method,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: jsonString
+        });
+    }
+
+    if(responseType == "json")response = await response.json();
+    else response = await response.text();
+
+    return response;
+}

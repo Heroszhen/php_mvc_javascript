@@ -72,7 +72,7 @@ require_once dirname(__DIR__)."/header.php";
                 </div>
                 <div class="modal-body">
                     <div>
-                        <label for="files" ondragenter="dragenter(event)" ondragleave="dragleave(event)" ondragover="dragover(event)" ondrop="drop(event)">Sélectionner</label>
+                        <label for="files" ondragenter="dragenter(event)" ondragleave="dragleave(event)" ondragover="dragover(event)" ondrop="drop(event)">Sélectionner ou Glisser</label>
                         <input type="file" class="d-none" id="files" name="files" onchange="choosePhotos(event.target.files)"  multiple>
                     </div>
                     <div class="mt-2">

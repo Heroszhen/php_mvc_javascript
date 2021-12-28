@@ -13,7 +13,8 @@ class User extends AbstractModel{
             "password" => "",
             "firstname" => "",
             "created" => "",
-            "role" => ""
+            "role" => "",
+            "photo" => ""
         ];
     }
 

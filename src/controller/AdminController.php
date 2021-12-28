@@ -196,4 +196,21 @@ class AdminController extends AbstractController{
             "allphoto"=> $allphoto
         ]);
     }
+
+    public function deleteArticle($id){
+        $response = [
+            "status" => 1,
+            "message" => ""
+        ];
+
+        $article = new Article();
+        $response["message"] = $article->deleteOneArticleById($id);
+        $this->json($response);
+    }
+
+    public function getAllUsers(){
+        return $this->render("admin/users.php",[
+            
+        ]);
+    }
 }

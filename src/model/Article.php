@@ -26,11 +26,19 @@ class Article extends AbstractModel{
 
     public function addOneArticle(array $params){
         unset($params["id"],$params["created"]);
+        $params["text"] = htmlspecialchars($params["text"]);
         return $this->persist("article",$params);
     }
     public function updateOneArticle(array $params){
         unset($params["created"]);
         $params["text"] = htmlspecialchars($params["text"]);//htmlentities
         return $this->persist("article",$params,$params["id"]);
+    }
+
+    public function deleteOneArticleById(int $id){
+        $req = "DELETE FROM article WHERE id = ".$id;
+        $del = $this->pdo->prepare($req);
+        $del->execute();
+        return $del->rowCount();
     }
 }

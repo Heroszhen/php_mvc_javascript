@@ -400,3 +400,56 @@ async function copyPhotoUrl(name){
     document.body.removeChild(input);
     alert("Copié");
 }
+
+//articles.php
+function deleteArticle(e){
+    if(window.confirm("Voulez-vous supprimer cet article ?")){
+        let btn = e.target;
+        let id = btn.getAttribute("data-id");
+        let tr = btn.parentNode.parentNode;
+        myFetch("delete","/admin/deletearticle/" + id)
+        .then((data)=>{
+            if(data["message"] == 1)tr.remove();
+        })
+        .catch(data=>alert("Erreurs"));
+    }
+}
+
+function sortAllArticle(field,order){
+    let tbody = document.querySelector("#admin-articles tbody");
+    let trs = document.querySelectorAll("#admin-articles tbody tr");
+    tbody.innerHTML = "";
+    let tab = [...trs];
+    if(field == 'id'){
+        let a_id,b_id;
+        tab.sort(function(a,b){
+            a_id = parseInt(a.querySelector("td").innerHTML);
+            b_id = parseInt(b.querySelector("td").innerHTML);
+            if(order == 1)return b_id - a_id;
+            else return a_id - b_id;
+        })
+    }
+
+    if(field == "title"){
+        let a_name = "";
+        let b_name = "";
+        tab.sort(function(a,b){
+            a_name = a.querySelectorAll("td")[1].innerHTML.trim();
+            b_name = b.querySelectorAll("td")[1].innerHTML.trim();
+            if(order == 1)return b_name.localeCompare(a_name);
+            else return  a_name.localeCompare(b_name);
+        })
+    }
+
+    if(field == "category"){
+        let a_category = "";
+        let b_category = "";
+        tab.sort(function(a,b){
+            a_category = a.querySelectorAll("td")[2].innerHTML.trim();
+            b_category = b.querySelectorAll("td")[2].innerHTML.trim();
+            if(order == 1)return b_category.localeCompare(a_category);
+            else return  a_category.localeCompare(b_category);
+        })
+    }
+    tab.forEach(node=>tbody.appendChild(node));
+}

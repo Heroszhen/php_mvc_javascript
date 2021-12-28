@@ -9,15 +9,33 @@ require_once dirname(__DIR__)."/header.php";
                 <section>
                     <div class="mb-2 d-flex align-items-center justify-content-between">
                         <a href="/admin/editer_un_article" class="btn btn-success btn-sm" >Ajouter</a>
-                        <div>filtres</div>
+                        <div></div>
                     </div>
                     <div class="mt-3">
                         <table class="table table-striped">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Titre</th>
-                                    <th scope="col">Catégorie</th>
+                                    <th scope="col">
+                                        <div class="fullwith d-flex align-items-center">
+                                            <div class="mr-2">Id</div>
+                                            <div class="mr-2 arrow pointer"><i class="bi bi-arrow-up" onclick="sortAllArticle('id',1)"></i></div>
+                                            <div class="arrow pointer"><i class="bi bi-arrow-down" onclick="sortAllArticle('id',2)"></i></div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="fullwith d-flex align-items-center">
+                                            <div class="mr-2">Titre</div>
+                                            <div class="mr-2 arrow pointer"><i class="bi bi-arrow-up" onclick="sortAllArticle('title',1)"></i></div>
+                                            <div class="arrow pointer"><i class="bi bi-arrow-down" onclick="sortAllArticle('title',2)"></i></div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="fullwith d-flex align-items-center">
+                                            <div class="mr-2">Catégorie</div>
+                                            <div class="mr-2 arrow pointer"><i class="bi bi-arrow-up" onclick="sortAllArticle('category',1)"></i></div>
+                                            <div class="arrow pointer"><i class="bi bi-arrow-down" onclick="sortAllArticle('category',2)"></i></div>
+                                        </div>
+                                    </th>
                                     <th scope="col">Créé(e)</th>
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -36,7 +54,7 @@ require_once dirname(__DIR__)."/header.php";
                                         </td>
                                         <td data-label="Actions">
                                             <a class="btn btn-info btn-sm mr-2 modifycategory" href="/admin/editer_un_article/<?= $one['id'] ?>">Modifier</a>
-                                            <button class="btn btn-danger btn-sm"  data-id="<?= $one['id'] ?>" disabled>Supprimer</button>
+                                            <button class="btn btn-danger btn-sm"  data-id="<?= $one['id'] ?>" onclick="deleteArticle(event)">Supprimer</button>
                                         </td>
                                     </tr>
                                 <?php }?>
