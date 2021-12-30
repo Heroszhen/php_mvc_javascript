@@ -7,7 +7,7 @@ class LoginObserver implements \SplObserver{
     public function update(\SplSubject $subject){
         $user = $subject->getUser();
         $this->setSession($user);
-        $this->sendEmail($user);
+        //$this->sendEmail($user);
     }
 
     private function setSession(array $user){

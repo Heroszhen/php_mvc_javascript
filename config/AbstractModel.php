@@ -93,8 +93,12 @@ abstract class AbstractModel{
 	}
 
 	protected function remove(string $entity,int $id){
-		$req = $req = "DELETE FROM ".$entity." WHERE id = ".$id;
-        $this->pdo->query($req);
+		// $req = $req = "DELETE FROM ".$entity." WHERE id = ".$id;
+        // $this->pdo->query($req);
+		$req = "DELETE FROM ".$entity." WHERE id = ".$id;
+        $del = $this->pdo->prepare($req);
+        $del->execute();
+        return $del->rowCount();
 	}
 
 }

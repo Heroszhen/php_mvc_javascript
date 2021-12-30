@@ -3,7 +3,11 @@
 
 C'est un petit projet créé en PHP  en appliquant la structure MVC(model, vue, controller)
 <ul>
-    <li>blog en front : https://github.com/Heroszhen/php_mvc_javascript_blog_front</li>
+    <li>blog en front(sveltejs) : https://github.com/Heroszhen/php_mvc_javascript_blog_front</li>
+    <li>
+        <div>email: exemple@gmail.com</div>
+        <div>mot de passe: aaaaaaaa</div>
+    </li>
     <li>Template : html</li>
     <li>Javascript natif</li>
     <li>Router : nikic/fast-route</li>

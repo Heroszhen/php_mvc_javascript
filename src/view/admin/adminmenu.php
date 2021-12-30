@@ -26,10 +26,16 @@
             <div>Commentaires</div>
         </a>
    </div>
-   <div class="onelink">
-        <a>
+   <div class="onelink <?php if($_SESSION['page'] == 'admin' && $_SESSION['menu'] == 'users')echo 'active'; ?>">
+        <a href="/admin/utilisateurs">
             <div><i class="bi bi-people-fill"></i></div>
             <div>Utilisateurs</div>
+        </a>
+   </div>
+   <div class="onelink">
+        <a href="/deconnexion">
+            <div><i class="bi bi-box-arrow-right"></i></div>
+            <div>Déconnexion</div>
         </a>
    </div>
 </div>

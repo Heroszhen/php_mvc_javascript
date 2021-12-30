@@ -8,6 +8,7 @@ use App\Model\Category;
 use App\Model\Photo;
 use App\Model\Article;
 use App\Service\ToolService;
+use App\Model\User;
 
 class AdminController extends AbstractController{
 
@@ -209,6 +210,11 @@ class AdminController extends AbstractController{
     }
 
     public function getAllUsers(){
+        if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != 1)$this->Toredirect("");
+        $_SESSION["page"] = "admin";
+        $_SESSION["menu"] = "users";
+
+
         return $this->render("admin/users.php",[
             
         ]);
