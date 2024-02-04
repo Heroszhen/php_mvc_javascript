@@ -3,6 +3,14 @@ $( document ).ready(function() {
     resizeAdminHeaderMenu2();
 });
 
+/*
+(function() {
+   // your page initialization code here
+   // the DOM will be available here
+
+})();
+*/
+
 const host_name = "http://localhost:8000/";
 
 function resizeAdminHeaderMenu(){
